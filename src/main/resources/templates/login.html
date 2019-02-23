@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
+
+    <title>BookShop</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://getbootstrap.com/docs/4.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for navbar -->
+    <link href="../static/css/navbar-top-fixed.css" th:href="@{/css/navbar-top-fixed.css}" rel="stylesheet">
+    <!-- Custom styles for login form -->
+    <link href="../static/css/login.css" th:href="@{/css/login.css}" rel="stylesheet"/>
+</head>
+
+<body class="text-center">
+<div th:replace="fragments/fragments :: navbar"></div>
+<!--<img class="mb-4" src="../../assets/brand/bootstrap-solid.svg" alt="" width="72" height="72"> -->
+<form class="form-signin" th:action="@{/login}" method="post">
+    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+    <label for="inputUsername" class="sr-only">Login</label>
+    <input type="text" id="inputUsername" name="username" class="form-control" placeholder="Username" required
+           autofocus>
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
+    <!--<div class="checkbox mb-1">
+        <label>
+            <input type="checkbox" value="remember-me"> Remember me
+        </label>
+    </div> Remember me checkbox -->
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    <div>Don't have account?&nbsp;<a th:href="@{/registration}">Register now</a></div>
+    <!--<p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>-->
+</form>
+<div th:replace="fragments/fragments :: scripts"></div>
+</body>
+</html>

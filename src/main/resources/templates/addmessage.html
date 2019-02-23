@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<div th:replace="fragments/fragments :: head"></div>
+
+<body>
+<div th:replace="fragments/fragments :: navbar"></div>
+<main role="main" class="container mt-5">
+    <form action="#" th:action="@{/messages/add}" th:object="${newMessage}" method="post">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <h2>Add new message</h2>
+                <hr>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="tittle">Tittle</label>
+                    <input type="text" th:field="*{tittle}" class="form-control" id="tittle" placeholder="Tittle">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="body">Book name</label>
+                    <input type="text" th:field="*{body}" class="form-control" id="body"
+                           placeholder="Message body">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </form>
+</main>
+
+<div th:replace="fragments/fragments :: scripts"></div>
+</body>
+</html>

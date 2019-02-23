@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<div th:replace="fragments/fragments :: head"></div>
+
+<body>
+<div th:replace="fragments/fragments :: navbar"></div>
+<main role="main" class="container mt-5">
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">Fluid jumbotron</h1>
+            <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent. Click
+                <a th:href="@{/books}">here</a> to see our books.</p>
+        </div>
+    </div>
+</main>
+<div th:replace="fragments/fragments :: scripts"></div>
+</body>
+</html>

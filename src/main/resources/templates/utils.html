@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<tr th:each="book: ${books}">
+    <td th:text="${book.bookName}"/>
+    <td th:text="${book.author}"/>
+    <td th:text="${book.description}"/>
+</tr>
+
+<form action="#" th:action="@{/add}" th:object="${newBook}" method="post">
+    <label for="author">Author</label>
+    <input type="text" th:field="*{author}" id="author" placeholder="Author">
+    <!--<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span> for validation-->
+    <label for="bookName">Book name</label>
+    <input type="text" th:field="*{bookName}" id="bookName" placeholder="Book name">
+    <!--<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span> for validation-->
+    <input type="text" th:field="*{description}" id="description" placeholder="Book description">
+    <!--<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span> for validation-->
+    <input type="submit" value="Add Book">
+</form>
+</body>
+</html>
