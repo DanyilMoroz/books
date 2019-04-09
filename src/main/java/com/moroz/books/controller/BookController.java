@@ -9,8 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Set;
-
 @Controller
 @RequestMapping("/")
 public class BookController {
@@ -37,7 +35,7 @@ public class BookController {
         model.addAttribute("books", bookRepository.findAll());
         model.addAttribute("categories", categoryRepository.findAll());
         model.addAttribute("filterResult", new FilterResult());
-        return "bookcards";
+        return "books";
     }
 
     @GetMapping("add")
@@ -56,9 +54,14 @@ public class BookController {
     }
     @PostMapping("filter")
     public String filter(@ModelAttribute FilterResult filterResult, Model model) {
+        if(filterResult.getCategories().size() == 0){
+            model.addAttribute("books", bookRepository.findAll());
+            model.addAttribute("categories", categoryRepository.findAll());
+            return "books";
+        }
         model.addAttribute("books", filterResultService.result(filterResult));
         model.addAttribute("categories", categoryRepository.findAll());
-        return "bookcards";
+        return "books";
     }
 
     @GetMapping("edit/{id}")
