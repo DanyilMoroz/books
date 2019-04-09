@@ -38,9 +38,9 @@
             </div>
     </form>
     </div>
-    <div class="card-deck mt-5">
+    <div class="card-columns mt-3">
         <div th:each="book: ${books}" class="card" style="width: 18rem;">
-            <img class="card-img-top" src=".../100px180/" alt="Card image cap">
+            <img class="card-img-top" th:src="@{'img/' + ${book.imageName}}" alt="Card image cap">
             <div class="card-body">
                 <h5 class="card-title" th:text="${book.bookName}">Card title</h5>
                 <p class="card-text" th:text="${book.description}"></p>

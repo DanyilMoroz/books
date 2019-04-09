@@ -2,6 +2,7 @@ package com.moroz.books.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -34,6 +35,6 @@ public class Book {
     )
     private Set<Category> categories;
 
-
+    private String imageName;
 
 }

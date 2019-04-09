@@ -5,9 +5,15 @@ import com.moroz.books.model.FilterResult;
 import com.moroz.books.repository.BookRepository;
 import com.moroz.books.repository.CategoryRepository;
 import com.moroz.books.service.FilterResultService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/")
@@ -16,6 +22,9 @@ public class BookController {
     private final BookRepository bookRepository;
     private final CategoryRepository categoryRepository;
     private final FilterResultService filterResultService;
+
+    @Value("${upload.path}")
+    private String uploadPath;
 
     public BookController(BookRepository bookRepository,
                           CategoryRepository categoryRepository,
@@ -46,7 +55,19 @@ public class BookController {
     }
 
     @PostMapping("add")
-    public String add(@ModelAttribute Book book, Model model) {
+    public String add(@ModelAttribute Book book,
+                      @RequestParam("file") MultipartFile file, Model model) throws IOException {
+        if(file != null){
+            File uploadDir = new File(uploadPath);
+            if(!uploadDir.exists()){
+                uploadDir.mkdir();
+            }
+
+            String uuidFile = UUID.randomUUID().toString();
+            String fileName = uuidFile + "." + file.getOriginalFilename();
+            file.transferTo(new File(uploadPath + "/" + fileName));
+            book.setImageName(fileName);
+        }
         bookRepository.save(book);
         model.addAttribute("books", bookRepository.findAll());
         model.addAttribute("categories", categoryRepository.findAll());

@@ -8,7 +8,7 @@
 <body>
 <div th:replace="fragments/fragments :: navbar"></div>
 <main role="main" class="container mt-5">
-    <form action="#" th:action="@{/add}" th:object="${newBook}" method="post">
+    <form action="#" th:action="@{/add}" th:object="${newBook}" method="post" enctype="multipart/form-data">
         <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-6">
@@ -58,6 +58,15 @@
                     <label for="description">Book name</label>
                     <textarea th:field="*{description}" class="form-control" id="description" rows="3"
                               placeholder="Book description"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="image">Example file input</label>
+                    <input type="file" th:name="file" class="form-control-file" id="image">
                 </div>
             </div>
         </div>
