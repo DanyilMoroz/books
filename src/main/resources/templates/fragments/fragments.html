@@ -40,6 +40,7 @@
         </ul>
         <span class="navbar-text mr-2" sec:authorize="isAuthenticated()">
             <span sec:authentication="name"></span>
+            <span sec:authentication="principal.authorities"></span>
         </span>
         <div th:fragment="logout" class="logout" sec:authorize="isAuthenticated()">
             <form class="form-inline mt-2 mt-md-0" th:action="@{/logout}" method="post">
