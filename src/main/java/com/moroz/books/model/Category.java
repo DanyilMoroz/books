@@ -1,6 +1,7 @@
 package com.moroz.books.model;
 
 import lombok.Data;
+import lombok.Getter;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

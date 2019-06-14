@@ -7,46 +7,47 @@
 
 <body>
 <div th:replace="fragments/fragments :: navbar"></div>
+
 <main role="main" class="container">
-    <a class="btn btn-primary mt-5" data-toggle="collapse" href="#filter" role="button" aria-expanded="false"
-       aria-controls="collapseExample">
-        Filter by category
-    </a>
-    <div class="collapse " id="filter">
-        <form action="#" th:action="@{/filter}" th:object="${filterResult}" method="post">
-            <div class="row">
-                <div class="col-md-3"></div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <div class="form-check form-check-inline ml-2"  th:each="category : ${categories}">
-                            <input class="form-check-input" type="checkbox"
-                                   th:field="*{categories}"
-                                   th:value="${{category}}">
-                            <label class="form-check-label"
-                                   th:for="${#ids.prev('categories')}"
-                                   th:text="${category.name}">
-                            </label>
+    <h1 class="my-4" th:text="${categoryName}"></h1>
+    <div th:each="book: ${books}" >
+        <!-- Project -->
+        <div class="row">
+            <div class="col-6 col-md-4 text-center">
+                <a href="#" >
+                    <img class="img-fluid rounded mb-3 mb-md-0 text-center" width="200" height="250"
+                         th:src="@{'~/img/' + ${book.imageName}}" alt="" >
+                </a>
+            </div>
+            </ul>
+            <div class="col-12 col-md-8">
+                <span th:each="category: ${book.categories}">
+                    <a class="badge badge-dark"
+                       th:text="${category.name}"
+                       th:href="@{'~/category/' + ${category.id}}">
+                    </a>
+                </span>
+                <div sec:authorize="hasAuthority('ADMIN')">
+                    <span class="btn-group pull-right float-right">
+                        <div class="btn-group dropleft" role="group">
+                        <button type="button" class="btn btn-outline-dark dropdown-toggle dropdown-toggle-split glyphicon glyphicon-cog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="sr-only"></span>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" th:href="@{'edit/' + ${book.id}}">Редатировать</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" th:href="@{'delete/' + ${book.id}}">Удалить</a>
                         </div>
-                    </div>
+                        </div>
+                    </span>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-3"></div>
-                <div class="col-md-6">
-                    <button type="submit" class="btn btn-primary">Apply filters</button>
-                </div>
-            </div>
-    </form>
-    </div>
-    <div class="card-columns mt-3">
-        <div th:each="book: ${books}" class="card" style="width: 18rem;">
-            <img class="card-img-top" th:src="@{'img/' + ${book.imageName}}" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title" th:text="${book.bookName}">Card title</h5>
-                <p class="card-text" th:text="${book.description}"></p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                <h3 th:text="${book.bookName}"></h3>
+                <p th:text="${book.description}"></p>
+                <a class="btn btn-outline-dark" href="#">Подробнее</a>
             </div>
         </div>
+        <!-- /.row -->
+        <hr>
     </div>
 </main>
 

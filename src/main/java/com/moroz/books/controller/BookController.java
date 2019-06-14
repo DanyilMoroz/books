@@ -44,7 +44,8 @@ public class BookController {
         model.addAttribute("books", bookRepository.findAll());
         model.addAttribute("categories", categoryRepository.findAll());
         model.addAttribute("filterResult", new FilterResult());
-        return "list";
+        model.addAttribute("categoryName", "All books");
+        return "books";
     }
 
     @GetMapping("add")
@@ -83,6 +84,13 @@ public class BookController {
         }
         model.addAttribute("books", filterResultService.result(filterResult));
         model.addAttribute("categories", categoryRepository.findAll());
+        return "books";
+    }
+
+    @GetMapping("category/{id}")
+    public String findByCategory(@PathVariable("id") Long id, Model model){
+        model.addAttribute("books", bookRepository.findBookByCategoriesId(id));
+        model.addAttribute("categoryName", categoryRepository.findCategoryById(id).getName());
         return "books";
     }
 
