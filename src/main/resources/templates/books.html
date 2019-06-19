@@ -15,7 +15,7 @@
         <div class="row">
             <div class="col-6 col-md-4 text-center">
                 <a href="#" >
-                    <img class="img-fluid rounded mb-3 mb-md-0 text-center" width="200" height="250"
+                    <img class="mb-md-0 text-center" width="165" height="250"
                          th:src="@{'~/img/' + ${book.imageName}}" alt="" >
                 </a>
             </div>
@@ -42,12 +42,13 @@
                     </span>
                 </div>
                 <h3 th:text="${book.bookName}"></h3>
-                <p th:text="${book.description}"></p>
+                <!-- <p th:text="${book.description}"></p> -->
+                <p th:text="${#strings.abbreviate(book.description, 512)}"></p>
                 <a class="btn btn-outline-dark" href="#">Подробнее</a>
             </div>
         </div>
-        <!-- /.row -->
         <hr>
+        <!-- /.row -->
     </div>
 </main>
 

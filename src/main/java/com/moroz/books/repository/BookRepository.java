@@ -11,7 +11,5 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     Book findBookById(Long id);
     Set<Book> findDistinctByCategoriesIn(Set<Category> categories);
-
     Set<Book> findBookByCategoriesId(Long id);
-
 }
