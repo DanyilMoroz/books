@@ -8,9 +8,12 @@ import com.moroz.books.service.FilterResultService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
@@ -50,14 +53,19 @@ public class BookController {
 
     @GetMapping("add")
     public String addPage(Model model) {
-        model.addAttribute("newBook", new Book());
+        model.addAttribute("book", new Book());
         model.addAttribute("categories", categoryRepository.findAll());
         return "add";
     }
 
     @PostMapping("add")
-    public String add(@ModelAttribute Book book,
-                      @RequestParam("file") MultipartFile file, Model model) throws IOException {
+    public String add(@Valid @ModelAttribute("book") Book book, BindingResult result, @RequestParam("file") MultipartFile file, Model model) throws IOException {
+
+        if(result.hasErrors()){
+            model.addAttribute("categories", categoryRepository.findAll());
+            return "add";
+        }
+
         //обязательно добавить дефолтные картинки для списка книг (230х320) и страницы просмотра
         if(file != null ){
             File uploadDir = new File(uploadPath);
