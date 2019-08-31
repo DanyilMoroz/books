@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
 
@@ -12,17 +13,18 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 public class Book {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotNull
+    @NotBlank(message = "Book must have name!")
     private String bookName;
 
-    @NotNull
+    @NotBlank(message = "Book must have author!")
     private String author;
 
-    @NotNull
+    @NotBlank(message = "Book must have description")
     @Column(length = 65535)
     private String description;
 
@@ -36,5 +38,4 @@ public class Book {
     private Set<Category> categories;
 
     private String imageName;
-
 }

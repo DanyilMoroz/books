@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    url: jdbc:h2:file:./data/database
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  jpa:
+    hibernate:
+      ddl-auto: validate
+files:
+  upload:
+    uploadPath: E:\dev\books-new\books\upload

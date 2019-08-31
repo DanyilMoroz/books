@@ -16,6 +16,7 @@ import java.util.Collections;
 
 @Controller
 public class RegistrationController {
+
     @Autowired
     private UserRepository userRepository;
 
